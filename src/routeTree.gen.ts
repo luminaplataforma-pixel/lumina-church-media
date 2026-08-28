@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArtesRouteImport } from './routes/_authenticated/artes'
 import { Route as AuthenticatedConteudosRouteImport } from './routes/_authenticated/conteudos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedLegendasRouteImport } from './routes/_authenticated/legendas'
 import { Route as AuthenticatedPlanejamentoRouteImport } from './routes/_authenticated/planejamento'
 import { Route as AuthenticatedVersiculosRouteImport } from './routes/_authenticated/versiculos'
 
@@ -47,6 +48,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedLegendasRoute = AuthenticatedLegendasRouteImport.update({
+  id: '/legendas',
+  path: '/legendas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPlanejamentoRoute =
   AuthenticatedPlanejamentoRouteImport.update({
     id: '/planejamento',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/artes': typeof AuthenticatedArtesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/legendas': typeof AuthenticatedLegendasRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
 }
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/artes': typeof AuthenticatedArtesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/legendas': typeof AuthenticatedLegendasRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
 }
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/_authenticated/artes': typeof AuthenticatedArtesRoute
   '/_authenticated/conteudos': typeof AuthenticatedConteudosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/legendas': typeof AuthenticatedLegendasRoute
   '/_authenticated/planejamento': typeof AuthenticatedPlanejamentoRoute
   '/_authenticated/versiculos': typeof AuthenticatedVersiculosRoute
 }
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/artes'
     | '/conteudos'
     | '/dashboard'
+    | '/legendas'
     | '/planejamento'
     | '/versiculos'
   fileRoutesByTo: FileRoutesByTo
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/artes'
     | '/conteudos'
     | '/dashboard'
+    | '/legendas'
     | '/planejamento'
     | '/versiculos'
   id:
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/artes'
     | '/_authenticated/conteudos'
     | '/_authenticated/dashboard'
+    | '/_authenticated/legendas'
     | '/_authenticated/planejamento'
     | '/_authenticated/versiculos'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/legendas': {
+      id: '/_authenticated/legendas'
+      path: '/legendas'
+      fullPath: '/legendas'
+      preLoaderRoute: typeof AuthenticatedLegendasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/planejamento': {
       id: '/_authenticated/planejamento'
       path: '/planejamento'
@@ -190,6 +209,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedArtesRoute: typeof AuthenticatedArtesRoute
   AuthenticatedConteudosRoute: typeof AuthenticatedConteudosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedLegendasRoute: typeof AuthenticatedLegendasRoute
   AuthenticatedPlanejamentoRoute: typeof AuthenticatedPlanejamentoRoute
   AuthenticatedVersiculosRoute: typeof AuthenticatedVersiculosRoute
 }
@@ -198,6 +218,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArtesRoute: AuthenticatedArtesRoute,
   AuthenticatedConteudosRoute: AuthenticatedConteudosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedLegendasRoute: AuthenticatedLegendasRoute,
   AuthenticatedPlanejamentoRoute: AuthenticatedPlanejamentoRoute,
   AuthenticatedVersiculosRoute: AuthenticatedVersiculosRoute,
 }
