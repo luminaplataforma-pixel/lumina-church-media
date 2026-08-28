@@ -16,6 +16,7 @@ import { Route as AuthenticatedArtesRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedConteudosRouteImport } from './routes/_authenticated/conteudos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedPlanejamentoRouteImport } from './routes/_authenticated/planejamento'
+import { Route as AuthenticatedVersiculosRouteImport } from './routes/_authenticated/versiculos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const AuthenticatedPlanejamentoRoute =
     path: '/planejamento',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedVersiculosRoute = AuthenticatedVersiculosRouteImport.update({
+  id: '/versiculos',
+  path: '/versiculos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
+  '/versiculos': typeof AuthenticatedVersiculosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
+  '/versiculos': typeof AuthenticatedVersiculosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,13 +86,27 @@ export interface FileRoutesById {
   '/_authenticated/conteudos': typeof AuthenticatedConteudosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/planejamento': typeof AuthenticatedPlanejamentoRoute
+  '/_authenticated/versiculos': typeof AuthenticatedVersiculosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/artes' | '/conteudos' | '/dashboard' | '/planejamento'
+    | '/'
+    | '/auth'
+    | '/artes'
+    | '/conteudos'
+    | '/dashboard'
+    | '/planejamento'
+    | '/versiculos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/artes' | '/conteudos' | '/dashboard' | '/planejamento'
+  to:
+    | '/'
+    | '/auth'
+    | '/artes'
+    | '/conteudos'
+    | '/dashboard'
+    | '/planejamento'
+    | '/versiculos'
   id:
     | '__root__'
     | '/'
@@ -94,6 +116,7 @@ export interface FileRouteTypes {
     | '/_authenticated/conteudos'
     | '/_authenticated/dashboard'
     | '/_authenticated/planejamento'
+    | '/_authenticated/versiculos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -153,6 +176,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPlanejamentoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/versiculos': {
+      id: '/_authenticated/versiculos'
+      path: '/versiculos'
+      fullPath: '/versiculos'
+      preLoaderRoute: typeof AuthenticatedVersiculosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -161,6 +191,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedConteudosRoute: typeof AuthenticatedConteudosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedPlanejamentoRoute: typeof AuthenticatedPlanejamentoRoute
+  AuthenticatedVersiculosRoute: typeof AuthenticatedVersiculosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -168,6 +199,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedConteudosRoute: AuthenticatedConteudosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedPlanejamentoRoute: AuthenticatedPlanejamentoRoute,
+  AuthenticatedVersiculosRoute: AuthenticatedVersiculosRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
