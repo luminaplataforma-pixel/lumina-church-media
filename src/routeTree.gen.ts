@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedArtesRouteImport } from './routes/_authenticated/artes'
 import { Route as AuthenticatedConteudosRouteImport } from './routes/_authenticated/conteudos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedPlanejamentoRouteImport } from './routes/_authenticated/planejamento'
@@ -29,6 +30,11 @@ const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedArtesRoute = AuthenticatedArtesRouteImport.update({
+  id: '/artes',
+  path: '/artes',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedConteudosRoute = AuthenticatedConteudosRouteImport.update({
   id: '/conteudos',
@@ -50,6 +56,7 @@ const AuthenticatedPlanejamentoRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/artes': typeof AuthenticatedArtesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/artes': typeof AuthenticatedArtesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
@@ -66,20 +74,23 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/artes': typeof AuthenticatedArtesRoute
   '/_authenticated/conteudos': typeof AuthenticatedConteudosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/planejamento': typeof AuthenticatedPlanejamentoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/conteudos' | '/dashboard' | '/planejamento'
+  fullPaths:
+    '/' | '/auth' | '/artes' | '/conteudos' | '/dashboard' | '/planejamento'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/conteudos' | '/dashboard' | '/planejamento'
+  to: '/' | '/auth' | '/artes' | '/conteudos' | '/dashboard' | '/planejamento'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/artes'
     | '/_authenticated/conteudos'
     | '/_authenticated/dashboard'
     | '/_authenticated/planejamento'
@@ -114,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/artes': {
+      id: '/_authenticated/artes'
+      path: '/artes'
+      fullPath: '/artes'
+      preLoaderRoute: typeof AuthenticatedArtesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/conteudos': {
       id: '/_authenticated/conteudos'
       path: '/conteudos'
@@ -139,12 +157,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedArtesRoute: typeof AuthenticatedArtesRoute
   AuthenticatedConteudosRoute: typeof AuthenticatedConteudosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedPlanejamentoRoute: typeof AuthenticatedPlanejamentoRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedArtesRoute: AuthenticatedArtesRoute,
   AuthenticatedConteudosRoute: AuthenticatedConteudosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedPlanejamentoRoute: AuthenticatedPlanejamentoRoute,
