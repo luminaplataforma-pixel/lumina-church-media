@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArtesRouteImport } from './routes/_authenticated/artes'
 import { Route as AuthenticatedConteudosRouteImport } from './routes/_authenticated/conteudos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEscalaRouteImport } from './routes/_authenticated/escala'
 import { Route as AuthenticatedEventosRouteImport } from './routes/_authenticated/eventos'
 import { Route as AuthenticatedLegendasRouteImport } from './routes/_authenticated/legendas'
 import { Route as AuthenticatedPlanejamentoRouteImport } from './routes/_authenticated/planejamento'
@@ -49,6 +50,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEscalaRoute = AuthenticatedEscalaRouteImport.update({
+  id: '/escala',
+  path: '/escala',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedEventosRoute = AuthenticatedEventosRouteImport.update({
   id: '/eventos',
   path: '/eventos',
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/artes': typeof AuthenticatedArtesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/escala': typeof AuthenticatedEscalaRoute
   '/eventos': typeof AuthenticatedEventosRoute
   '/legendas': typeof AuthenticatedLegendasRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/artes': typeof AuthenticatedArtesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/escala': typeof AuthenticatedEscalaRoute
   '/eventos': typeof AuthenticatedEventosRoute
   '/legendas': typeof AuthenticatedLegendasRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/_authenticated/artes': typeof AuthenticatedArtesRoute
   '/_authenticated/conteudos': typeof AuthenticatedConteudosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/escala': typeof AuthenticatedEscalaRoute
   '/_authenticated/eventos': typeof AuthenticatedEventosRoute
   '/_authenticated/legendas': typeof AuthenticatedLegendasRoute
   '/_authenticated/planejamento': typeof AuthenticatedPlanejamentoRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/artes'
     | '/conteudos'
     | '/dashboard'
+    | '/escala'
     | '/eventos'
     | '/legendas'
     | '/planejamento'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
     | '/artes'
     | '/conteudos'
     | '/dashboard'
+    | '/escala'
     | '/eventos'
     | '/legendas'
     | '/planejamento'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/_authenticated/artes'
     | '/_authenticated/conteudos'
     | '/_authenticated/dashboard'
+    | '/_authenticated/escala'
     | '/_authenticated/eventos'
     | '/_authenticated/legendas'
     | '/_authenticated/planejamento'
@@ -193,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/escala': {
+      id: '/_authenticated/escala'
+      path: '/escala'
+      fullPath: '/escala'
+      preLoaderRoute: typeof AuthenticatedEscalaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/eventos': {
       id: '/_authenticated/eventos'
       path: '/eventos'
@@ -228,6 +247,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedArtesRoute: typeof AuthenticatedArtesRoute
   AuthenticatedConteudosRoute: typeof AuthenticatedConteudosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEscalaRoute: typeof AuthenticatedEscalaRoute
   AuthenticatedEventosRoute: typeof AuthenticatedEventosRoute
   AuthenticatedLegendasRoute: typeof AuthenticatedLegendasRoute
   AuthenticatedPlanejamentoRoute: typeof AuthenticatedPlanejamentoRoute
@@ -238,6 +258,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArtesRoute: AuthenticatedArtesRoute,
   AuthenticatedConteudosRoute: AuthenticatedConteudosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEscalaRoute: AuthenticatedEscalaRoute,
   AuthenticatedEventosRoute: AuthenticatedEventosRoute,
   AuthenticatedLegendasRoute: AuthenticatedLegendasRoute,
   AuthenticatedPlanejamentoRoute: AuthenticatedPlanejamentoRoute,
