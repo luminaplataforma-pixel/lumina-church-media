@@ -13,11 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArtesRouteImport } from './routes/_authenticated/artes'
+import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
 import { Route as AuthenticatedConteudosRouteImport } from './routes/_authenticated/conteudos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEscalaRouteImport } from './routes/_authenticated/escala'
 import { Route as AuthenticatedEventosRouteImport } from './routes/_authenticated/eventos'
 import { Route as AuthenticatedLegendasRouteImport } from './routes/_authenticated/legendas'
 import { Route as AuthenticatedPlanejamentoRouteImport } from './routes/_authenticated/planejamento'
+import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
 import { Route as AuthenticatedVersiculosRouteImport } from './routes/_authenticated/versiculos'
 
 const IndexRoute = IndexRouteImport.update({
@@ -39,6 +42,12 @@ const AuthenticatedArtesRoute = AuthenticatedArtesRouteImport.update({
   path: '/artes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedConfiguracoesRoute =
+  AuthenticatedConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedConteudosRoute = AuthenticatedConteudosRouteImport.update({
   id: '/conteudos',
   path: '/conteudos',
@@ -47,6 +56,11 @@ const AuthenticatedConteudosRoute = AuthenticatedConteudosRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEscalaRoute = AuthenticatedEscalaRouteImport.update({
+  id: '/escala',
+  path: '/escala',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedEventosRoute = AuthenticatedEventosRouteImport.update({
@@ -65,6 +79,11 @@ const AuthenticatedPlanejamentoRoute =
     path: '/planejamento',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedRelatoriosRoute = AuthenticatedRelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedVersiculosRoute = AuthenticatedVersiculosRouteImport.update({
   id: '/versiculos',
   path: '/versiculos',
@@ -75,22 +94,28 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/artes': typeof AuthenticatedArtesRoute
+  '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/escala': typeof AuthenticatedEscalaRoute
   '/eventos': typeof AuthenticatedEventosRoute
   '/legendas': typeof AuthenticatedLegendasRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/artes': typeof AuthenticatedArtesRoute
+  '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/escala': typeof AuthenticatedEscalaRoute
   '/eventos': typeof AuthenticatedEventosRoute
   '/legendas': typeof AuthenticatedLegendasRoute
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
 }
 export interface FileRoutesById {
@@ -99,11 +124,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/artes': typeof AuthenticatedArtesRoute
+  '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/_authenticated/conteudos': typeof AuthenticatedConteudosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/escala': typeof AuthenticatedEscalaRoute
   '/_authenticated/eventos': typeof AuthenticatedEventosRoute
   '/_authenticated/legendas': typeof AuthenticatedLegendasRoute
   '/_authenticated/planejamento': typeof AuthenticatedPlanejamentoRoute
+  '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
   '/_authenticated/versiculos': typeof AuthenticatedVersiculosRoute
 }
 export interface FileRouteTypes {
@@ -112,22 +140,28 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/artes'
+    | '/configuracoes'
     | '/conteudos'
     | '/dashboard'
+    | '/escala'
     | '/eventos'
     | '/legendas'
     | '/planejamento'
+    | '/relatorios'
     | '/versiculos'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/artes'
+    | '/configuracoes'
     | '/conteudos'
     | '/dashboard'
+    | '/escala'
     | '/eventos'
     | '/legendas'
     | '/planejamento'
+    | '/relatorios'
     | '/versiculos'
   id:
     | '__root__'
@@ -135,11 +169,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/artes'
+    | '/_authenticated/configuracoes'
     | '/_authenticated/conteudos'
     | '/_authenticated/dashboard'
+    | '/_authenticated/escala'
     | '/_authenticated/eventos'
     | '/_authenticated/legendas'
     | '/_authenticated/planejamento'
+    | '/_authenticated/relatorios'
     | '/_authenticated/versiculos'
   fileRoutesById: FileRoutesById
 }
@@ -179,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedArtesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/configuracoes': {
+      id: '/_authenticated/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof AuthenticatedConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/conteudos': {
       id: '/_authenticated/conteudos'
       path: '/conteudos'
@@ -191,6 +235,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/escala': {
+      id: '/_authenticated/escala'
+      path: '/escala'
+      fullPath: '/escala'
+      preLoaderRoute: typeof AuthenticatedEscalaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/eventos': {
@@ -214,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPlanejamentoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/relatorios': {
+      id: '/_authenticated/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof AuthenticatedRelatoriosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/versiculos': {
       id: '/_authenticated/versiculos'
       path: '/versiculos'
@@ -226,21 +284,27 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedArtesRoute: typeof AuthenticatedArtesRoute
+  AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
   AuthenticatedConteudosRoute: typeof AuthenticatedConteudosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEscalaRoute: typeof AuthenticatedEscalaRoute
   AuthenticatedEventosRoute: typeof AuthenticatedEventosRoute
   AuthenticatedLegendasRoute: typeof AuthenticatedLegendasRoute
   AuthenticatedPlanejamentoRoute: typeof AuthenticatedPlanejamentoRoute
+  AuthenticatedRelatoriosRoute: typeof AuthenticatedRelatoriosRoute
   AuthenticatedVersiculosRoute: typeof AuthenticatedVersiculosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArtesRoute: AuthenticatedArtesRoute,
+  AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,
   AuthenticatedConteudosRoute: AuthenticatedConteudosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEscalaRoute: AuthenticatedEscalaRoute,
   AuthenticatedEventosRoute: AuthenticatedEventosRoute,
   AuthenticatedLegendasRoute: AuthenticatedLegendasRoute,
   AuthenticatedPlanejamentoRoute: AuthenticatedPlanejamentoRoute,
+  AuthenticatedRelatoriosRoute: AuthenticatedRelatoriosRoute,
   AuthenticatedVersiculosRoute: AuthenticatedVersiculosRoute,
 }
 
