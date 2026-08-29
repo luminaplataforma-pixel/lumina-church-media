@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Instagram, LogOut, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import { APP_ROLE_META } from "@/lib/lumina";
 import { useTheme } from "@/lib/theme";
 import { useWorkspace } from "@/lib/workspace";
 
@@ -26,24 +27,25 @@ export const Route = createFileRoute("/_authenticated/configuracoes")({
 });
 
 function Configuracoes() {
-  const { workspace, profile, refresh, signOut } = useWorkspace();
-  const { theme, setTheme } = useTheme();
+  const { workspaceId, workspaceName, fullName, email, userId, roles, refresh } = useWorkspace();
+  const { theme, toggle } = useTheme();
+  const navigate = useNavigate();
   const [church, setChurch] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [name, setName] = useState("");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    setChurch(workspace?.name ?? "");
-    setFullName(profile?.full_name ?? "");
-  }, [workspace?.name, profile?.full_name]);
+    setChurch(workspaceName);
+    setName(fullName);
+  }, [workspaceName, fullName]);
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (!workspace || !profile) return;
+    if (!workspaceId || !userId) return;
     setSaving(true);
     const [w, p] = await Promise.all([
-      supabase.from("workspaces").update({ name: church.trim() }).eq("id", workspace.id),
-      supabase.from("profiles").update({ full_name: fullName.trim() }).eq("id", profile.id),
+      supabase.from("workspaces").update({ name: church.trim() }).eq("id", workspaceId),
+      supabase.from("profiles").update({ full_name: name.trim() }).eq("id", userId),
     ]);
     setSaving(false);
     if (w.error || p.error) {
@@ -51,7 +53,12 @@ function Configuracoes() {
       return;
     }
     toast.success("Configurações atualizadas.");
-    await refresh();
+    refresh();
+  }
+
+  async function signOut() {
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
   }
 
   return (
@@ -67,9 +74,13 @@ function Configuracoes() {
           </div>
           <div className="space-y-1.5">
             <Label>Seu nome</Label>
-            <Input value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+            <Input value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
         </div>
+        <p className="text-xs text-muted-foreground">
+          Conta: {email ?? "—"} · Permissões:{" "}
+          {roles.length ? roles.map((r) => APP_ROLE_META[r].label).join(", ") : "—"}
+        </p>
         <Button type="submit" disabled={saving}>
           {saving ? "Salvando..." : "Salvar alterações"}
         </Button>
@@ -78,26 +89,12 @@ function Configuracoes() {
       <section className="surface space-y-4 p-6">
         <h2 className="font-display text-lg font-semibold">Aparência</h2>
         <p className="text-sm text-muted-foreground">
-          Escolha entre o modo claro e o modo escuro da Lumina.
+          Alterne entre o modo claro e o modo escuro da Lumina.
         </p>
-        <div className="flex gap-2">
-          <Button
-            type="button"
-            variant={theme === "light" ? "default" : "outline"}
-            className="gap-2"
-            onClick={() => setTheme("light")}
-          >
-            <Sun className="size-4" /> Claro
-          </Button>
-          <Button
-            type="button"
-            variant={theme === "dark" ? "default" : "outline"}
-            className="gap-2"
-            onClick={() => setTheme("dark")}
-          >
-            <Moon className="size-4" /> Escuro
-          </Button>
-        </div>
+        <Button type="button" variant="outline" className="gap-2" onClick={toggle}>
+          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          {theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
+        </Button>
       </section>
 
       <section className="surface space-y-4 p-6">
@@ -113,7 +110,7 @@ function Configuracoes() {
           className="gap-2"
           onClick={() =>
             toast.info(
-              "A autorização oficial da Meta será liberada assim que o app da igreja for aprovado. Nenhum dado técnico é necessário.",
+              "A autorização oficial da Meta é liberada após a aprovação do app da igreja. Nenhum dado técnico é necessário.",
             )
           }
         >
@@ -123,7 +120,7 @@ function Configuracoes() {
 
       <section className="surface space-y-4 p-6">
         <h2 className="font-display text-lg font-semibold">Sessão</h2>
-        <Button type="button" variant="outline" className="gap-2" onClick={() => signOut()}>
+        <Button type="button" variant="outline" className="gap-2" onClick={signOut}>
           <LogOut className="size-4" /> Sair da conta
         </Button>
       </section>
