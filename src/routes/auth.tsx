@@ -13,9 +13,8 @@ import { supabase } from "@/integrations/supabase/client";
 type Mode = "signin" | "signup" | "reset";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: { mode?: string }) => ({
-    mode: (search.mode === "signup" ? "signup" : "signin") as Mode,
-  }),
+  validateSearch: (search: { mode?: string }): { mode?: Mode } =>
+    search.mode === "signup" ? { mode: "signup" } : {},
   head: () => ({
     meta: [
       { title: "Entrar no Lumina — Gestão de mídia para igrejas" },
@@ -33,7 +32,7 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const { mode: initialMode } = Route.useSearch();
   const navigate = useNavigate();
-  const [mode, setMode] = useState<Mode>(initialMode);
+  const [mode, setMode] = useState<Mode>(initialMode ?? "signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
