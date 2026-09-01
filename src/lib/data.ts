@@ -64,7 +64,7 @@ export function useSaveRow(table: TableName, entityLabel: string) {
       if (id) {
         const { data, error } = await supabase
           .from(table)
-          .update(rest)
+          .update(rest as never)
           .eq("id", id)
           .eq("workspace_id", workspaceId)
           .select()
@@ -81,7 +81,7 @@ export function useSaveRow(table: TableName, entityLabel: string) {
       }
       const { data, error } = await supabase
         .from(table)
-        .insert({ ...rest, workspace_id: workspaceId })
+        .insert({ ...rest, workspace_id: workspaceId } as never)
         .select()
         .single();
       if (error) throw error;
@@ -129,7 +129,7 @@ export function useBulkInsert(table: TableName, entityLabel: string) {
   return useMutation({
     mutationFn: async (rows: Record<string, unknown>[]) => {
       const payload = rows.map((r) => ({ ...r, workspace_id: workspaceId }));
-      const { error } = await supabase.from(table).insert(payload);
+      const { error } = await supabase.from(table).insert(payload as never);
       if (error) throw error;
       await logActivity(workspaceId!, fullName, "criou", entityLabel, `${rows.length} registro(s)`);
     },

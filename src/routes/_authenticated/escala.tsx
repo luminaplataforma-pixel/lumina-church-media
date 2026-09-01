@@ -71,7 +71,7 @@ function Escala() {
   const schedules = useRows<ScheduleRow>("schedules", { order: "schedule_date", ascending: true });
   const saveMember = useSaveRow("team_members", "integrante");
   const removeMember = useDeleteRow("team_members", "integrante");
-  const saveSchedule = useSaveRow("schedules", "escala");
+  
   const removeSchedule = useDeleteRow("schedules", "escala");
   const bulkSchedule = useBulkInsert("schedules", "escala");
 
