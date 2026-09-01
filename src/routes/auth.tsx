@@ -13,8 +13,8 @@ import { supabase } from "@/integrations/supabase/client";
 type Mode = "signin" | "signup" | "reset";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    mode: (search['mode'] === "signup" ? "signup" : "signin") as Mode,
+  validateSearch: (search: { mode?: string }) => ({
+    mode: (search.mode === "signup" ? "signup" : "signin") as Mode,
   }),
   head: () => ({
     meta: [
