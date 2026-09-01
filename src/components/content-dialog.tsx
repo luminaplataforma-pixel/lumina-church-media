@@ -94,7 +94,7 @@ export function ContentDialog({
   open: boolean;
   onOpenChange: (v: boolean) => void;
   content?: ContentRow | null;
-  defaultDate?: string;
+  defaultDate?: string | undefined;
 }) {
   const save = useSaveRow("contents", "conteúdo");
   const remove = useDeleteRow("contents", "conteúdo");
