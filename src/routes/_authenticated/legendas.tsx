@@ -94,17 +94,6 @@ function Legendas() {
         subtitle="Legendas prontas, organizadas e reutilizáveis para cada publicação."
         actions={
           <div className="flex gap-2">
-            <AIAssistant
-              onUse={(text) => {
-                setDraft({ ...EMPTY, title: "Legenda gerada com IA", text });
-                setOpen(true);
-              }}
-              trigger={
-                <Button variant="outline" className="gap-2">
-                  <Sparkles className="size-4" /> Gerar com IA
-                </Button>
-              }
-            />
             <Button
               className="gap-2"
               onClick={() => {

@@ -4,7 +4,7 @@ import {
   BookOpen,
   CalendarDays,
   CalendarRange,
-  FileText,
+  
   Image as ImageIcon,
   LayoutDashboard,
   LogOut,
@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 export const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/planejamento", label: "Planejamento", icon: CalendarDays },
-  { to: "/conteudos", label: "Conteúdos", icon: FileText },
+  
   { to: "/artes", label: "Biblioteca de Artes", icon: ImageIcon },
   { to: "/versiculos", label: "Banco de Versículos", icon: BookOpen },
   { to: "/legendas", label: "Banco de Legendas", icon: PenLine },
@@ -151,7 +151,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
 
           <div className="ml-auto flex items-center gap-2">
-            <AIAssistant />
+            
             <Button variant="outline" size="icon" onClick={toggle} aria-label="Alternar tema">
               {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </Button>
