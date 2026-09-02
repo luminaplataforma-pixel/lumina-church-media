@@ -141,6 +141,9 @@ function Legendas() {
         subtitle="Legendas prontas, organizadas e reutilizáveis para cada publicação."
         actions={
           <div className="flex gap-2">
+            <Button variant="outline" className="gap-2" onClick={() => setAiOpen(true)}>
+              <Sparkles className="size-4" /> Gerar com IA
+            </Button>
             <Button
               className="gap-2"
               onClick={() => {
