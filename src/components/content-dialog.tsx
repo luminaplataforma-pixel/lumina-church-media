@@ -1,6 +1,5 @@
 import { Loader2, Sparkles, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { AIAssistant } from "@/components/ai-assistant";
 import { MediaPreview } from "@/components/media-preview";
 import { UploadDropzone } from "@/components/upload-dropzone";
 import {

@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Copy, Pencil, PenLine, Plus, Search, Sparkles, Star, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { AIAssistant } from "@/components/ai-assistant";
 import { EmptyState, LoadingGrid, PageHeader } from "@/components/ui-bits";
 import {
   AlertDialog,
