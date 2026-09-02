@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Copy, Pencil, PenLine, Plus, Search, Star, Trash2 } from "lucide-react";
+import { Copy, Pencil, PenLine, Plus, Search, Sparkles, Star, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { EmptyState, LoadingGrid, PageHeader } from "@/components/ui-bits";
+import { runLuminaAI } from "@/lib/ai.functions";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -63,6 +64,52 @@ function Legendas() {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<Draft>(EMPTY);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiFormat, setAiFormat] = useState("");
+  const [aiGoal, setAiGoal] = useState("");
+  const [aiText, setAiText] = useState("");
+  const [aiPending, setAiPending] = useState(false);
+
+  async function generateWithAI() {
+    if (!aiPrompt.trim()) {
+      toast.error("Descreva o tema da legenda.");
+      return;
+    }
+    setAiPending(true);
+    setAiText("");
+    const res = await runLuminaAI({
+      data: {
+        mode: "legenda",
+        prompt: aiPrompt.trim(),
+        format: aiFormat || undefined,
+        goal: aiGoal || undefined,
+      },
+    });
+    setAiPending(false);
+    if (res.error || !res.text) {
+      toast.error(res.error ?? "A IA não conseguiu gerar agora.");
+      return;
+    }
+    setAiText(res.text);
+  }
+
+  function saveAICaption() {
+    const title = aiPrompt.trim().slice(0, 80) || "Legenda gerada por IA";
+    save.mutate(
+      { title, text: aiText.trim(), category: null, kind: aiFormat || null, favorite: false },
+      {
+        onSuccess: () => {
+          setAiOpen(false);
+          setAiPrompt("");
+          setAiFormat("");
+          setAiGoal("");
+          setAiText("");
+          toast.success("Legenda salva no banco!");
+        },
+      },
+    );
+  }
 
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase();
@@ -94,6 +141,9 @@ function Legendas() {
         subtitle="Legendas prontas, organizadas e reutilizáveis para cada publicação."
         actions={
           <div className="flex gap-2">
+            <Button variant="outline" className="gap-2" onClick={() => setAiOpen(true)}>
+              <Sparkles className="size-4" /> Gerar com IA
+            </Button>
             <Button
               className="gap-2"
               onClick={() => {
@@ -247,6 +297,73 @@ function Legendas() {
               </Button>
             </DialogFooter>
           </form>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={aiOpen} onOpenChange={setAiOpen}>
+        <DialogContent className="max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Sparkles className="size-4 text-primary" /> Gerar legenda com IA
+            </DialogTitle>
+            <DialogDescription>
+              Descreva o tema e o Lumina AI cria uma legenda pronta para salvar no banco.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label>Tema da legenda *</Label>
+              <Input
+                value={aiPrompt}
+                onChange={(e) => setAiPrompt(e.target.value)}
+                placeholder="Ex.: Convite para o culto de domingo de Páscoa"
+              />
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label>Formato</Label>
+                <Input
+                  value={aiFormat}
+                  onChange={(e) => setAiFormat(e.target.value)}
+                  placeholder="Reels, Feed..."
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label>Objetivo</Label>
+                <Input
+                  value={aiGoal}
+                  onChange={(e) => setAiGoal(e.target.value)}
+                  placeholder="Engajamento, convite..."
+                />
+              </div>
+            </div>
+            {aiText && (
+              <div className="space-y-1.5">
+                <Label>Legenda gerada</Label>
+                <Textarea rows={10} value={aiText} onChange={(e) => setAiText(e.target.value)} />
+              </div>
+            )}
+            <DialogFooter className="gap-2 sm:gap-2">
+              <Button type="button" variant="outline" onClick={() => setAiOpen(false)}>
+                Fechar
+              </Button>
+              <Button
+                type="button"
+                variant={aiText ? "outline" : "default"}
+                className="gap-2"
+                disabled={aiPending}
+                onClick={() => void generateWithAI()}
+              >
+                <Sparkles className="size-4" />
+                {aiPending ? "Gerando..." : aiText ? "Gerar novamente" : "Gerar legenda"}
+              </Button>
+              {aiText && (
+                <Button type="button" disabled={save.isPending} onClick={saveAICaption}>
+                  Salvar no banco
+                </Button>
+              )}
+            </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </>
