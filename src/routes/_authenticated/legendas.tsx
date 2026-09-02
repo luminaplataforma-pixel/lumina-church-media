@@ -299,6 +299,73 @@ function Legendas() {
           </form>
         </DialogContent>
       </Dialog>
+
+      <Dialog open={aiOpen} onOpenChange={setAiOpen}>
+        <DialogContent className="max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Sparkles className="size-4 text-primary" /> Gerar legenda com IA
+            </DialogTitle>
+            <DialogDescription>
+              Descreva o tema e o Lumina AI cria uma legenda pronta para salvar no banco.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label>Tema da legenda *</Label>
+              <Input
+                value={aiPrompt}
+                onChange={(e) => setAiPrompt(e.target.value)}
+                placeholder="Ex.: Convite para o culto de domingo de Páscoa"
+              />
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label>Formato</Label>
+                <Input
+                  value={aiFormat}
+                  onChange={(e) => setAiFormat(e.target.value)}
+                  placeholder="Reels, Feed..."
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label>Objetivo</Label>
+                <Input
+                  value={aiGoal}
+                  onChange={(e) => setAiGoal(e.target.value)}
+                  placeholder="Engajamento, convite..."
+                />
+              </div>
+            </div>
+            {aiText && (
+              <div className="space-y-1.5">
+                <Label>Legenda gerada</Label>
+                <Textarea rows={10} value={aiText} onChange={(e) => setAiText(e.target.value)} />
+              </div>
+            )}
+            <DialogFooter className="gap-2 sm:gap-2">
+              <Button type="button" variant="outline" onClick={() => setAiOpen(false)}>
+                Fechar
+              </Button>
+              <Button
+                type="button"
+                variant={aiText ? "outline" : "default"}
+                className="gap-2"
+                disabled={aiPending}
+                onClick={() => void generateWithAI()}
+              >
+                <Sparkles className="size-4" />
+                {aiPending ? "Gerando..." : aiText ? "Gerar novamente" : "Gerar legenda"}
+              </Button>
+              {aiText && (
+                <Button type="button" disabled={save.isPending} onClick={saveAICaption}>
+                  Salvar no banco
+                </Button>
+              )}
+            </DialogFooter>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
