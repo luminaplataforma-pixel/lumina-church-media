@@ -99,6 +99,7 @@ function Escala() {
   const [notes, setNotes] = useState("");
 
   const monthKey = `${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}`;
+  const todayISO = toISODate(new Date());
   const monthSchedules = (schedules.data ?? []).filter((s) => s.schedule_date.startsWith(monthKey));
   const nameOf = (id: string) => members.data?.find((m) => m.id === id)?.name ?? "Integrante";
 
