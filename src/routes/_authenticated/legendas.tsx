@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Copy, Pencil, PenLine, Plus, Search, Sparkles, Star, Trash2 } from "lucide-react";
+import { Copy, Pencil, PenLine, Plus, Search, Star, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { EmptyState, LoadingGrid, PageHeader } from "@/components/ui-bits";
@@ -212,18 +212,7 @@ function Legendas() {
               />
             </div>
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <Label>Texto *</Label>
-                <AIAssistant
-                  defaultPrompt={draft.title}
-                  onUse={(text) => setDraft({ ...draft, text })}
-                  trigger={
-                    <Button type="button" size="sm" variant="ghost" className="gap-1.5">
-                      <Sparkles className="size-3.5" /> IA
-                    </Button>
-                  }
-                />
-              </div>
+              <Label>Texto *</Label>
               <Textarea
                 required
                 rows={8}
