@@ -14,7 +14,6 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArtesRouteImport } from './routes/_authenticated/artes'
 import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
-import { Route as AuthenticatedConteudosRouteImport } from './routes/_authenticated/conteudos'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEscalaRouteImport } from './routes/_authenticated/escala'
 import { Route as AuthenticatedEventosRouteImport } from './routes/_authenticated/eventos'
@@ -48,11 +47,6 @@ const AuthenticatedConfiguracoesRoute =
     path: '/configuracoes',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedConteudosRoute = AuthenticatedConteudosRouteImport.update({
-  id: '/conteudos',
-  path: '/conteudos',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -95,7 +89,6 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/artes': typeof AuthenticatedArtesRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
-  '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/escala': typeof AuthenticatedEscalaRoute
   '/eventos': typeof AuthenticatedEventosRoute
@@ -109,7 +102,6 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/artes': typeof AuthenticatedArtesRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
-  '/conteudos': typeof AuthenticatedConteudosRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/escala': typeof AuthenticatedEscalaRoute
   '/eventos': typeof AuthenticatedEventosRoute
@@ -125,7 +117,6 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/artes': typeof AuthenticatedArtesRoute
   '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
-  '/_authenticated/conteudos': typeof AuthenticatedConteudosRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/escala': typeof AuthenticatedEscalaRoute
   '/_authenticated/eventos': typeof AuthenticatedEventosRoute
@@ -141,7 +132,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/artes'
     | '/configuracoes'
-    | '/conteudos'
     | '/dashboard'
     | '/escala'
     | '/eventos'
@@ -155,7 +145,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/artes'
     | '/configuracoes'
-    | '/conteudos'
     | '/dashboard'
     | '/escala'
     | '/eventos'
@@ -170,7 +159,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/artes'
     | '/_authenticated/configuracoes'
-    | '/_authenticated/conteudos'
     | '/_authenticated/dashboard'
     | '/_authenticated/escala'
     | '/_authenticated/eventos'
@@ -221,13 +209,6 @@ declare module '@tanstack/react-router' {
       path: '/configuracoes'
       fullPath: '/configuracoes'
       preLoaderRoute: typeof AuthenticatedConfiguracoesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/conteudos': {
-      id: '/_authenticated/conteudos'
-      path: '/conteudos'
-      fullPath: '/conteudos'
-      preLoaderRoute: typeof AuthenticatedConteudosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -285,7 +266,6 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedArtesRoute: typeof AuthenticatedArtesRoute
   AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
-  AuthenticatedConteudosRoute: typeof AuthenticatedConteudosRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEscalaRoute: typeof AuthenticatedEscalaRoute
   AuthenticatedEventosRoute: typeof AuthenticatedEventosRoute
@@ -298,7 +278,6 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArtesRoute: AuthenticatedArtesRoute,
   AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,
-  AuthenticatedConteudosRoute: AuthenticatedConteudosRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEscalaRoute: AuthenticatedEscalaRoute,
   AuthenticatedEventosRoute: AuthenticatedEventosRoute,

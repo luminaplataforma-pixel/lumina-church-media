@@ -4,7 +4,7 @@ import {
   BookOpen,
   CalendarDays,
   CalendarRange,
-  FileText,
+  
   Image as ImageIcon,
   LayoutDashboard,
   LogOut,
@@ -18,7 +18,6 @@ import {
 import { useState, type ReactNode } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { LuminaLogo, LuminaMark } from "@/components/lumina-logo";
-import { AIAssistant } from "@/components/ai-assistant";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { supabase } from "@/integrations/supabase/client";
@@ -29,7 +28,7 @@ import { cn } from "@/lib/utils";
 export const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/planejamento", label: "Planejamento", icon: CalendarDays },
-  { to: "/conteudos", label: "Conteúdos", icon: FileText },
+  
   { to: "/artes", label: "Biblioteca de Artes", icon: ImageIcon },
   { to: "/versiculos", label: "Banco de Versículos", icon: BookOpen },
   { to: "/legendas", label: "Banco de Legendas", icon: PenLine },
@@ -152,7 +151,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
 
           <div className="ml-auto flex items-center gap-2">
-            <AIAssistant />
+            
             <Button variant="outline" size="icon" onClick={toggle} aria-label="Alternar tema">
               {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </Button>

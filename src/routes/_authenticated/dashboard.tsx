@@ -153,14 +153,14 @@ function Dashboard() {
           value={list.filter((c) => c.status !== "publicado" && c.status !== "cancelado").length}
           hint={`${list.length} no total`}
           icon={FileText}
-          to="/conteudos"
+          to="/planejamento"
         />
         <Kpi
           label="Publicados"
           value={published}
           hint={`${completion}% de conclusão`}
           icon={CheckCircle2}
-          to="/conteudos"
+          to="/planejamento"
         />
         <Kpi
           label="Próximos eventos"

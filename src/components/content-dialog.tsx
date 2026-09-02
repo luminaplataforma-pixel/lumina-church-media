@@ -1,6 +1,5 @@
-import { Loader2, Sparkles, Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { AIAssistant } from "@/components/ai-assistant";
 import { MediaPreview } from "@/components/media-preview";
 import { UploadDropzone } from "@/components/upload-dropzone";
 import {
@@ -319,18 +318,7 @@ export function ContentDialog({
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label>Legenda do post</Label>
-              <AIAssistant
-                defaultPrompt={draft.title}
-                onUse={(text) => set("caption_text", text)}
-                trigger={
-                  <Button type="button" size="sm" variant="ghost" className="gap-1.5">
-                    <Sparkles className="size-3.5" /> Gerar com IA
-                  </Button>
-                }
-              />
-            </div>
+            <Label>Legenda do post</Label>
             <Textarea
               rows={5}
               value={draft.caption_text}

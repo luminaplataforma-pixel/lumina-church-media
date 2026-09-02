@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Copy, Pencil, PenLine, Plus, Search, Sparkles, Star, Trash2 } from "lucide-react";
+import { Copy, Pencil, PenLine, Plus, Search, Star, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { AIAssistant } from "@/components/ai-assistant";
 import { EmptyState, LoadingGrid, PageHeader } from "@/components/ui-bits";
 import {
   AlertDialog,
@@ -95,17 +94,6 @@ function Legendas() {
         subtitle="Legendas prontas, organizadas e reutilizáveis para cada publicação."
         actions={
           <div className="flex gap-2">
-            <AIAssistant
-              onUse={(text) => {
-                setDraft({ ...EMPTY, title: "Legenda gerada com IA", text });
-                setOpen(true);
-              }}
-              trigger={
-                <Button variant="outline" className="gap-2">
-                  <Sparkles className="size-4" /> Gerar com IA
-                </Button>
-              }
-            />
             <Button
               className="gap-2"
               onClick={() => {
@@ -224,18 +212,7 @@ function Legendas() {
               />
             </div>
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <Label>Texto *</Label>
-                <AIAssistant
-                  defaultPrompt={draft.title}
-                  onUse={(text) => setDraft({ ...draft, text })}
-                  trigger={
-                    <Button type="button" size="sm" variant="ghost" className="gap-1.5">
-                      <Sparkles className="size-3.5" /> IA
-                    </Button>
-                  }
-                />
-              </div>
+              <Label>Texto *</Label>
               <Textarea
                 required
                 rows={8}

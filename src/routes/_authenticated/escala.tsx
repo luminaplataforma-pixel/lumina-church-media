@@ -36,8 +36,18 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useBulkInsert, useDeleteRow, useRows, useSaveRow } from "@/lib/data";
-import { formatDateBR, MEDIA_ROLE_LIST, MEDIA_ROLE_META, MONTHS, type MediaRole } from "@/lib/lumina";
+import {
+  formatDateBR,
+  MEDIA_ROLE_LIST,
+  MEDIA_ROLE_META,
+  monthMatrix,
+  MONTHS,
+  toISODate,
+  WEEKDAYS,
+  type MediaRole,
+} from "@/lib/lumina";
 import type { ScheduleRow, TeamMemberRow } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/escala")({
   head: () => ({
@@ -76,6 +86,7 @@ function Escala() {
   const bulkSchedule = useBulkInsert("schedules", "escala");
 
   const [tab, setTab] = useState<"escala" | "equipe">("escala");
+  const [view, setView] = useState<"lista" | "calendario">("calendario");
   const [cursor, setCursor] = useState(() => new Date());
   const [memberOpen, setMemberOpen] = useState(false);
   const [memberDraft, setMemberDraft] = useState<MemberDraft>(EMPTY_MEMBER);
@@ -88,6 +99,7 @@ function Escala() {
   const [notes, setNotes] = useState("");
 
   const monthKey = `${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}`;
+  const todayISO = toISODate(new Date());
   const monthSchedules = (schedules.data ?? []).filter((s) => s.schedule_date.startsWith(monthKey));
   const nameOf = (id: string) => members.data?.find((m) => m.id === id)?.name ?? "Integrante";
 
@@ -215,6 +227,12 @@ function Escala() {
         </Tabs>
         {tab === "escala" && (
           <div className="flex items-center gap-2">
+            <Tabs value={view} onValueChange={(v) => setView(v as typeof view)}>
+              <TabsList>
+                <TabsTrigger value="calendario">Calendário</TabsTrigger>
+                <TabsTrigger value="lista">Lista</TabsTrigger>
+              </TabsList>
+            </Tabs>
             <Button
               variant="outline"
               size="icon"
@@ -236,7 +254,70 @@ function Escala() {
         )}
       </div>
 
-      {tab === "escala" &&
+      {tab === "escala" && view === "calendario" && (
+        <div className="surface overflow-hidden">
+          <div className="grid grid-cols-7 border-b border-border bg-muted/50">
+            {WEEKDAYS.map((d) => (
+              <div key={d} className="px-2 py-2 text-center text-xs font-medium text-muted-foreground">
+                {d}
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7">
+            {monthMatrix(cursor.getFullYear(), cursor.getMonth()).map((d) => {
+              const iso = toISODate(d);
+              const inMonth = d.getMonth() === cursor.getMonth();
+              const items = monthSchedules.filter((s) => s.schedule_date === iso);
+              return (
+                <div
+                  key={iso}
+                  className={cn(
+                    "min-h-[110px] border-b border-r border-border p-1.5",
+                    !inMonth && "bg-muted/30",
+                  )}
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={cn(
+                        "grid size-6 place-items-center rounded-full text-xs",
+                        iso === todayISO
+                          ? "bg-primary font-semibold text-primary-foreground"
+                          : "text-muted-foreground",
+                      )}
+                    >
+                      {d.getDate()}
+                    </span>
+                    <button
+                      onClick={() => {
+                        setDates([iso]);
+                        setScheduleOpen(true);
+                      }}
+                      className="text-muted-foreground hover:text-foreground"
+                      aria-label="Escalar nesta data"
+                    >
+                      <Plus className="size-3.5" />
+                    </button>
+                  </div>
+                  <div className="mt-1 space-y-1">
+                    {items.map((s) => (
+                      <div
+                        key={s.id}
+                        title={`${nameOf(s.member_id)} · ${MEDIA_ROLE_META[s.role]} · ${s.time_label}`}
+                        className="truncate rounded-md bg-muted px-1.5 py-1 text-[11px]"
+                      >
+                        <span className="font-medium">{nameOf(s.member_id)}</span>{" "}
+                        <span className="text-muted-foreground">{MEDIA_ROLE_META[s.role]}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {tab === "escala" && view === "lista" &&
         (grouped.length === 0 ? (
           <EmptyState
             icon={<Users className="size-8" />}
