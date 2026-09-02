@@ -64,6 +64,52 @@ function Legendas() {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<Draft>(EMPTY);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiFormat, setAiFormat] = useState("");
+  const [aiGoal, setAiGoal] = useState("");
+  const [aiText, setAiText] = useState("");
+  const [aiPending, setAiPending] = useState(false);
+
+  async function generateWithAI() {
+    if (!aiPrompt.trim()) {
+      toast.error("Descreva o tema da legenda.");
+      return;
+    }
+    setAiPending(true);
+    setAiText("");
+    const res = await runLuminaAI({
+      data: {
+        mode: "legenda",
+        prompt: aiPrompt.trim(),
+        format: aiFormat || undefined,
+        goal: aiGoal || undefined,
+      },
+    });
+    setAiPending(false);
+    if (res.error || !res.text) {
+      toast.error(res.error ?? "A IA não conseguiu gerar agora.");
+      return;
+    }
+    setAiText(res.text);
+  }
+
+  function saveAICaption() {
+    const title = aiPrompt.trim().slice(0, 80) || "Legenda gerada por IA";
+    save.mutate(
+      { title, text: aiText.trim(), category: null, kind: aiFormat || null, favorite: false },
+      {
+        onSuccess: () => {
+          setAiOpen(false);
+          setAiPrompt("");
+          setAiFormat("");
+          setAiGoal("");
+          setAiText("");
+          toast.success("Legenda salva no banco!");
+        },
+      },
+    );
+  }
 
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase();
