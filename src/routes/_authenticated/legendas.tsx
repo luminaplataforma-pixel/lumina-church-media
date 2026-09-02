@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Copy, Pencil, PenLine, Plus, Search, Star, Trash2 } from "lucide-react";
+import { Copy, Pencil, PenLine, Plus, Search, Sparkles, Star, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { EmptyState, LoadingGrid, PageHeader } from "@/components/ui-bits";
+import { runLuminaAI } from "@/lib/ai.functions";
 import {
   AlertDialog,
   AlertDialogAction,
