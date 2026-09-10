@@ -22,6 +22,7 @@ import { Route as AuthenticatedPlanejamentoRouteImport } from './routes/_authent
 import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
 import { Route as AuthenticatedVersiculosRouteImport } from './routes/_authenticated/versiculos'
 import { Route as AuthMetaCallbackRouteImport } from './routes/auth/meta/callback'
+import { Route as ApiPublicInstagramPublishDueRouteImport } from './routes/api/public/instagram/publish-due'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -89,6 +90,12 @@ const AuthMetaCallbackRoute = AuthMetaCallbackRouteImport.update({
   path: '/meta/callback',
   getParentRoute: () => AuthRoute,
 } as any)
+const ApiPublicInstagramPublishDueRoute =
+  ApiPublicInstagramPublishDueRouteImport.update({
+    id: '/api/public/instagram/publish-due',
+    path: '/api/public/instagram/publish-due',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
   '/auth/meta/callback': typeof AuthMetaCallbackRoute
+  '/api/public/instagram/publish-due': typeof ApiPublicInstagramPublishDueRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -117,6 +125,7 @@ export interface FileRoutesByTo {
   '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
   '/auth/meta/callback': typeof AuthMetaCallbackRoute
+  '/api/public/instagram/publish-due': typeof ApiPublicInstagramPublishDueRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -133,6 +142,7 @@ export interface FileRoutesById {
   '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
   '/_authenticated/versiculos': typeof AuthenticatedVersiculosRoute
   '/auth/meta/callback': typeof AuthMetaCallbackRoute
+  '/api/public/instagram/publish-due': typeof ApiPublicInstagramPublishDueRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/relatorios'
     | '/versiculos'
     | '/auth/meta/callback'
+    | '/api/public/instagram/publish-due'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/relatorios'
     | '/versiculos'
     | '/auth/meta/callback'
+    | '/api/public/instagram/publish-due'
   id:
     | '__root__'
     | '/'
@@ -178,12 +190,14 @@ export interface FileRouteTypes {
     | '/_authenticated/relatorios'
     | '/_authenticated/versiculos'
     | '/auth/meta/callback'
+    | '/api/public/instagram/publish-due'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
+  ApiPublicInstagramPublishDueRoute: typeof ApiPublicInstagramPublishDueRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -279,6 +293,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthMetaCallbackRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/api/public/instagram/publish-due': {
+      id: '/api/public/instagram/publish-due'
+      path: '/api/public/instagram/publish-due'
+      fullPath: '/api/public/instagram/publish-due'
+      preLoaderRoute: typeof ApiPublicInstagramPublishDueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -323,6 +344,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
+  ApiPublicInstagramPublishDueRoute: ApiPublicInstagramPublishDueRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
