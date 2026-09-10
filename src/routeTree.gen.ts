@@ -21,6 +21,7 @@ import { Route as AuthenticatedLegendasRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedPlanejamentoRouteImport } from './routes/_authenticated/planejamento'
 import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
 import { Route as AuthenticatedVersiculosRouteImport } from './routes/_authenticated/versiculos'
+import { Route as AuthMetaCallbackRouteImport } from './routes/auth/meta/callback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -83,10 +84,15 @@ const AuthenticatedVersiculosRoute = AuthenticatedVersiculosRouteImport.update({
   path: '/versiculos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthMetaCallbackRoute = AuthMetaCallbackRouteImport.update({
+  id: '/meta/callback',
+  path: '/meta/callback',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/artes': typeof AuthenticatedArtesRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -96,10 +102,11 @@ export interface FileRoutesByFullPath {
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
   '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
+  '/auth/meta/callback': typeof AuthMetaCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/artes': typeof AuthenticatedArtesRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -109,12 +116,13 @@ export interface FileRoutesByTo {
   '/planejamento': typeof AuthenticatedPlanejamentoRoute
   '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/versiculos': typeof AuthenticatedVersiculosRoute
+  '/auth/meta/callback': typeof AuthMetaCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/_authenticated/artes': typeof AuthenticatedArtesRoute
   '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/_authenticated/planejamento': typeof AuthenticatedPlanejamentoRoute
   '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
   '/_authenticated/versiculos': typeof AuthenticatedVersiculosRoute
+  '/auth/meta/callback': typeof AuthMetaCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/relatorios'
     | '/versiculos'
+    | '/auth/meta/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/planejamento'
     | '/relatorios'
     | '/versiculos'
+    | '/auth/meta/callback'
   id:
     | '__root__'
     | '/'
@@ -166,12 +177,13 @@ export interface FileRouteTypes {
     | '/_authenticated/planejamento'
     | '/_authenticated/relatorios'
     | '/_authenticated/versiculos'
+    | '/auth/meta/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
+  AuthRoute: typeof AuthRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -260,6 +272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVersiculosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/auth/meta/callback': {
+      id: '/auth/meta/callback'
+      path: '/meta/callback'
+      fullPath: '/auth/meta/callback'
+      preLoaderRoute: typeof AuthMetaCallbackRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
 
@@ -290,10 +309,20 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface AuthRouteChildren {
+  AuthMetaCallbackRoute: typeof AuthMetaCallbackRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthMetaCallbackRoute: AuthMetaCallbackRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
+  AuthRoute: AuthRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
