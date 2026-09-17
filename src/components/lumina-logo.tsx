@@ -1,21 +1,10 @@
 import { cn } from "@/lib/utils";
+import lumyesLogo from "@/assets/lumyes-logo.svg";
 
 export function LuminaMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 32 32" className={cn("size-8", className)} aria-hidden="true">
-      <rect width="32" height="32" rx="9" className="fill-primary" />
-      <path
-        d="M16 6.5c1.2 3.9 3.6 6.3 7.5 7.5-3.9 1.2-6.3 3.6-7.5 7.5-1.2-3.9-3.6-6.3-7.5-7.5 3.9-1.2 6.3-3.6 7.5-7.5Z"
-        className="fill-primary-foreground"
-      />
-      <rect
-        x="11"
-        y="23.4"
-        width="10"
-        height="2.4"
-        rx="1.2"
-        className="fill-primary-foreground opacity-70"
-      />
+    <svg viewBox="0 0 132 132" className={cn("size-9 shrink-0", className)} aria-hidden="true">
+      <image href={lumyesLogo} width="500" height="132" />
     </svg>
   );
 }
@@ -23,15 +12,23 @@ export function LuminaMark({ className }: { className?: string }) {
 export function LuminaLogo({
   className,
   compact = false,
+  inverse = false,
 }: {
   className?: string;
   compact?: boolean;
+  inverse?: boolean;
 }) {
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
-      <LuminaMark />
-      {!compact && (
-        <span className="font-display text-lg font-semibold tracking-tight">Lumina</span>
+      {compact ? (
+        <LuminaMark />
+      ) : inverse ? (
+        <>
+          <LuminaMark />
+          <span className="font-display text-xl font-bold tracking-[-0.05em] text-white">Lumyes</span>
+        </>
+      ) : (
+        <img src={lumyesLogo} alt="Lumyes" className="h-8 w-auto" />
       )}
     </span>
   );

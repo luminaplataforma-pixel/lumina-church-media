@@ -19,12 +19,12 @@ export const Route = createFileRoute("/auth/meta/callback")({
   }),
   head: () => ({
     meta: [
-      { title: "Conectando o Instagram — Lumina" },
+      { title: "Conectando o Instagram — Lumyes" },
       {
         name: "description",
-        content: "Finalizando a autorização oficial da conta do Instagram da sua igreja na Lumina.",
+        content: "Finalizando a autorização oficial da conta do Instagram da sua igreja na Lumyes.",
       },
-      { property: "og:title", content: "Conectando o Instagram — Lumina" },
+      { property: "og:title", content: "Conectando o Instagram — Lumyes" },
       { property: "og:description", content: "Autorização oficial Meta concluída com segurança." },
     ],
   }),

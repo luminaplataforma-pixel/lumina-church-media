@@ -13,17 +13,17 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Lumina — O sistema operacional da mídia da sua igreja" },
+      { title: "Lumyes — O sistema operacional da mídia da sua igreja" },
       {
         name: "description",
         content:
           "Planeje, produza, escale e analise toda a comunicação da sua igreja em um só lugar: calendário editorial, kanban, artes, versículos, legendas, escala da equipe e Instagram.",
       },
-      { property: "og:title", content: "Lumina — Gestão de mídia para igrejas" },
+      { property: "og:title", content: "Lumyes — Gestão de mídia para igrejas" },
       {
         property: "og:description",
         content:
-          "Planejar, criar, produzir, revisar, escalar, publicar e analisar — tudo dentro do Lumina.",
+          "Planejar, criar, produzir, revisar, escalar, publicar e analisar — tudo dentro do Lumyes.",
       },
     ],
   }),
@@ -38,7 +38,7 @@ const FEATURES = [
   },
   {
     icon: Sparkles,
-    title: "Lumina AI",
+    title: "Lumyes AI",
     text: "Legendas, ideias, CTAs e calendários editoriais gerados para a sua igreja.",
   },
   {
@@ -80,7 +80,7 @@ function Landing() {
         </div>
       </header>
 
-      <section className="bg-lumina-glow">
+      <section className="bg-lumyes-glow">
         <div className="mx-auto w-full max-w-6xl px-5 py-20 text-center sm:py-28">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium">
             <Sparkles className="size-3.5 text-primary" /> Plataforma de mídia para igrejas
@@ -124,7 +124,7 @@ function Landing() {
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 sm:flex-row">
           <LuminaLogo />
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Lumina. Feito para a comunicação do Reino.
+            © {new Date().getFullYear()} Lumyes. Feito para a comunicação do Reino.
           </p>
         </div>
       </footer>

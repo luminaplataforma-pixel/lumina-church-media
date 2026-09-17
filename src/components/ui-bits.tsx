@@ -15,7 +15,10 @@ export function PageHeader({
   return (
     <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h1>
+        <div className="mb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+          <span className="size-2 rounded-full bg-primary" /> Lumyes workspace
+        </div>
+        <h1 className="font-display text-2xl font-bold tracking-[-0.04em] sm:text-3xl">{title}</h1>
         {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
@@ -35,7 +38,7 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border px-6 py-14 text-center">
+    <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-muted/30 px-6 py-14 text-center">
       {icon && <div className="text-muted-foreground">{icon}</div>}
       <div>
         <p className="font-medium">{title}</p>
@@ -59,7 +62,7 @@ export function LoadingGrid({ rows = 6 }: { rows?: number }) {
 export function StatusPill({ status }: { status: ContentStatus }) {
   const meta = STATUS_META[status];
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-2.5 py-0.5 text-xs font-medium">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-2.5 py-1 text-xs font-semibold">
       <span className={cn("size-1.5 rounded-full", meta.dot)} />
       {meta.label}
     </span>
@@ -70,7 +73,7 @@ export function ProgressBar({ value }: { value: number }) {
   return (
     <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
       <div
-        className="h-full rounded-full bg-primary transition-all duration-500"
+        className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
         style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
       />
     </div>

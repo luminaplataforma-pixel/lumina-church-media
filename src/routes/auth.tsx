@@ -17,12 +17,12 @@ export const Route = createFileRoute("/auth")({
     search.mode === "signup" ? { mode: "signup" } : {},
   head: () => ({
     meta: [
-      { title: "Entrar no Lumina — Gestão de mídia para igrejas" },
+      { title: "Entrar no Lumyes — Gestão de mídia para igrejas" },
       {
         name: "description",
-        content: "Acesse a plataforma Lumina para gerenciar o planejamento e a mídia da sua igreja.",
+        content: "Acesse a plataforma Lumyes para gerenciar o planejamento e a mídia da sua igreja.",
       },
-      { property: "og:title", content: "Entrar no Lumina" },
+      { property: "og:title", content: "Entrar no Lumyes" },
       { property: "og:description", content: "Acesse a plataforma de mídia da sua igreja." },
     ],
   }),
@@ -96,20 +96,20 @@ function AuthPage() {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       <div className="hidden flex-col justify-between bg-sidebar p-12 lg:flex">
-        <LuminaLogo />
+        <LuminaLogo inverse />
         <div>
           <h2 className="max-w-md text-4xl font-semibold leading-tight">
             Toda a comunicação da sua igreja, organizada em um só lugar.
           </h2>
           <p className="mt-4 max-w-md text-muted-foreground">
             Planejamento, artes, versículos, legendas, eventos, escala da equipe e indicadores — com
-            o Assistente Lumina AI ao seu lado.
+            o Assistente Lumyes AI ao seu lado.
           </p>
         </div>
-        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Lumina</p>
+        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Lumyes</p>
       </div>
 
-      <div className="flex items-center justify-center bg-lumina-glow px-5 py-12">
+      <div className="flex items-center justify-center bg-lumyes-glow px-5 py-12">
         <div className="w-full max-w-md">
           <div className="mb-8 lg:hidden">
             <LuminaLogo />
@@ -129,7 +129,7 @@ function AuthPage() {
                 ? "Criar conta da igreja"
                 : mode === "reset"
                   ? "Recuperar senha"
-                  : "Acessar o Lumina"}
+                  : "Acessar o Lumyes"}
             </h1>
 
             <form onSubmit={(e) => void submit(e)} className="mt-5 space-y-4">

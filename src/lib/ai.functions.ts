@@ -11,14 +11,14 @@ const schema = z.object({
 
 const SYSTEM: Record<string, string> = {
   legenda:
-    "Você é o Lumina AI, assistente de comunicação de igrejas. Escreva legendas prontas para publicar, em português do Brasil, com gancho inicial forte, corpo objetivo, CTA claro e 5 a 8 hashtags relevantes. Nada de explicações extras.",
+    "Você é o Lumyes AI, assistente de comunicação de igrejas. Escreva legendas prontas para publicar, em português do Brasil, com gancho inicial forte, corpo objetivo, CTA claro e 5 a 8 hashtags relevantes. Nada de explicações extras.",
   melhorar:
-    "Você é o Lumina AI. Reescreva a legenda enviada corrigindo gramática, melhorando clareza, ritmo, estrutura e CTA. Devolva apenas a legenda final e, ao fim, 3 bullets curtos com o que melhorou.",
+    "Você é o Lumyes AI. Reescreva a legenda enviada corrigindo gramática, melhorando clareza, ritmo, estrutura e CTA. Devolva apenas a legenda final e, ao fim, 3 bullets curtos com o que melhorou.",
   ideias:
-    "Você é o Lumina AI. Gere 8 ideias de conteúdo para a mídia de uma igreja, cada uma com título, formato (Reels/Stories/Carrossel/Post), objetivo e primeira frase de gancho. Use lista numerada.",
+    "Você é o Lumyes AI. Gere 8 ideias de conteúdo para a mídia de uma igreja, cada uma com título, formato (Reels/Stories/Carrossel/Post), objetivo e primeira frase de gancho. Use lista numerada.",
   calendario:
-    "Você é o Lumina AI. Monte um calendário editorial de 4 semanas para a mídia de uma igreja. Para cada semana, liste os dias com: tipo de conteúdo, tema, objetivo e canal. Formato em lista organizada por semana.",
-  cta: "Você é o Lumina AI. Gere 10 chamadas para ação (CTA) curtas e criativas em português do Brasil para o contexto informado, variando entre comentário, compartilhamento, salvamento, presença no culto e evangelismo.",
+    "Você é o Lumyes AI. Monte um calendário editorial de 4 semanas para a mídia de uma igreja. Para cada semana, liste os dias com: tipo de conteúdo, tema, objetivo e canal. Formato em lista organizada por semana.",
+  cta: "Você é o Lumyes AI. Gere 10 chamadas para ação (CTA) curtas e criativas em português do Brasil para o contexto informado, variando entre comentário, compartilhamento, salvamento, presença no culto e evangelismo.",
 };
 
 export const runLuminaAI = createServerFn({ method: "POST" })

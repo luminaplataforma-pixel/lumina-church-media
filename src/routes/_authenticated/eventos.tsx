@@ -41,12 +41,12 @@ import type { EventRow } from "@/lib/types";
 export const Route = createFileRoute("/_authenticated/eventos")({
   head: () => ({
     meta: [
-      { title: "Eventos — Lumina" },
+      { title: "Eventos — Lumyes" },
       {
         name: "description",
         content: "Cadastre cultos, conferências e eventos da igreja com data, local e responsável.",
       },
-      { property: "og:title", content: "Eventos — Lumina" },
+      { property: "og:title", content: "Eventos — Lumyes" },
       { property: "og:description", content: "Agenda completa dos eventos da igreja." },
     ],
   }),

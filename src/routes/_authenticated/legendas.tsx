@@ -34,12 +34,12 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/legendas")({
   head: () => ({
     meta: [
-      { title: "Banco de Legendas — Lumina" },
+      { title: "Banco de Legendas — Lumyes" },
       {
         name: "description",
         content: "Crie, salve e reutilize legendas prontas para as publicações da igreja.",
       },
-      { property: "og:title", content: "Banco de Legendas — Lumina" },
+      { property: "og:title", content: "Banco de Legendas — Lumyes" },
       { property: "og:description", content: "Legendas reutilizáveis com apoio da IA." },
     ],
   }),
@@ -173,7 +173,7 @@ function Legendas() {
         <EmptyState
           icon={<PenLine className="size-8" />}
           title="Nenhuma legenda salva"
-          description="Salve suas melhores legendas ou gere novas com o Lumina AI."
+          description="Salve suas melhores legendas ou gere novas com o Lumyes AI."
         />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -307,7 +307,7 @@ function Legendas() {
               <Sparkles className="size-4 text-primary" /> Gerar legenda com IA
             </DialogTitle>
             <DialogDescription>
-              Descreva o tema e o Lumina AI cria uma legenda pronta para salvar no banco.
+              Descreva o tema e o Lumyes AI cria uma legenda pronta para salvar no banco.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
