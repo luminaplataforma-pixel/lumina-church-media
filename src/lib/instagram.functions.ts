@@ -9,8 +9,11 @@ const SCOPES = [
   "instagram_business_manage_comments",
 ].join(",");
 
-async function workspaceOf(supabase: { rpc: (fn: string) => Promise<{ data: unknown }> }) {
-  const { data } = await supabase.rpc("current_workspace_id");
+async function workspaceOf(supabase: unknown) {
+  const client = supabase as {
+    rpc: (fn: "current_workspace_id") => Promise<{ data: unknown }>;
+  };
+  const { data } = await client.rpc("current_workspace_id");
   return (data as string | null) ?? null;
 }
 
@@ -19,7 +22,7 @@ export const getInstagramAuthUrl = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: unknown) => z.object({ origin: z.string().url() }).parse(data))
   .handler(async ({ data, context }) => {
-    const clientId = process.env['META_APP_ID'];
+    const clientId = process.env["META_APP_ID"];
     if (!clientId) {
       return { url: null, error: "A conexão com o Instagram ainda não foi configurada." };
     }
@@ -55,7 +58,8 @@ export const completeInstagramAuth = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { exchangeCodeForToken, toLongLivedToken, fetchProfile } = await import("./instagram.server");
+    const { exchangeCodeForToken, toLongLivedToken, fetchProfile } =
+      await import("./instagram.server");
 
     const { data: stateRow } = await supabaseAdmin
       .from("social_oauth_states")
@@ -96,7 +100,11 @@ export const completeInstagramAuth = createServerFn({ method: "POST" })
 
       await supabaseAdmin
         .from("social_account_secrets")
-        .upsert({ account_id: account.id, access_token: long.access_token, updated_at: new Date().toISOString() });
+        .upsert({
+          account_id: account.id,
+          access_token: long.access_token,
+          updated_at: new Date().toISOString(),
+        });
 
       // keep the legacy dashboard table in sync
       await supabaseAdmin.from("instagram_accounts").upsert(
@@ -122,11 +130,13 @@ export const getInstagramStatus = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("social_accounts")
-      .select("id, username, account_type, status, connected_at, last_sync_at, token_expires_at, instagram_user_id")
+      .select(
+        "id, username, account_type, status, connected_at, last_sync_at, token_expires_at, instagram_user_id",
+      )
       .eq("platform", "instagram")
       .order("connected_at", { ascending: false });
     if (error) throw error;
-    return { accounts: data ?? [], configured: !!process.env['META_APP_ID'] };
+    return { accounts: data ?? [], configured: !!process.env["META_APP_ID"] };
   });
 
 /** Pulls profile, recent media and insights from the official API. */
