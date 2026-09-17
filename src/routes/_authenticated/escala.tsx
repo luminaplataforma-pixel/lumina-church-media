@@ -52,13 +52,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/escala")({
   head: () => ({
     meta: [
-      { title: "Escala da Equipe — Lumina" },
+      { title: "Escala da Equipe — Lumyes" },
       {
         name: "description",
         content:
           "Monte a escala mensal da equipe de mídia com funções, múltiplas datas e alerta de conflitos.",
       },
-      { property: "og:title", content: "Escala da Equipe — Lumina" },
+      { property: "og:title", content: "Escala da Equipe — Lumyes" },
       { property: "og:description", content: "Escala mensal reutilizável da equipe de mídia." },
     ],
   }),

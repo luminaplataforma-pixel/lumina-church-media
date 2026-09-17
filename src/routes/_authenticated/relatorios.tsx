@@ -39,12 +39,12 @@ import type { ContentRow, ScheduleRow, TeamMemberRow } from "@/lib/types";
 export const Route = createFileRoute("/_authenticated/relatorios")({
   head: () => ({
     meta: [
-      { title: "Relatórios — Lumina" },
+      { title: "Relatórios — Lumyes" },
       {
         name: "description",
         content: "Indicadores de produção, tipos de conteúdo e participação da equipe de mídia.",
       },
-      { property: "og:title", content: "Relatórios — Lumina" },
+      { property: "og:title", content: "Relatórios — Lumyes" },
       { property: "og:description", content: "Relatórios com filtros e exportação em CSV." },
     ],
   }),

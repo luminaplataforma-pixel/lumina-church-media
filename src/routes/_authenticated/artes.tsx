@@ -41,12 +41,12 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/artes")({
   head: () => ({
     meta: [
-      { title: "Biblioteca de Artes — Lumina" },
+      { title: "Biblioteca de Artes — Lumyes" },
       {
         name: "description",
         content: "Organize artes, fotos e vídeos da igreja em pastas com preview e download.",
       },
-      { property: "og:title", content: "Biblioteca de Artes — Lumina" },
+      { property: "og:title", content: "Biblioteca de Artes — Lumyes" },
       { property: "og:description", content: "Upload direto, pastas e preview real das artes." },
     ],
   }),

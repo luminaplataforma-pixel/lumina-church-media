@@ -14,13 +14,13 @@ import { useWorkspace } from "@/lib/workspace";
 export const Route = createFileRoute("/_authenticated/configuracoes")({
   head: () => ({
     meta: [
-      { title: "Configurações — Lumina" },
+      { title: "Configurações — Lumyes" },
       {
         name: "description",
         content: "Ajuste os dados da igreja, seu perfil, tema e a conexão com o Instagram.",
       },
-      { property: "og:title", content: "Configurações — Lumina" },
-      { property: "og:description", content: "Preferências da conta e da igreja na Lumina." },
+      { property: "og:title", content: "Configurações — Lumyes" },
+      { property: "og:description", content: "Preferências da conta e da igreja na Lumyes." },
     ],
   }),
   component: Configuracoes,
@@ -89,7 +89,7 @@ function Configuracoes() {
       <section className="surface space-y-4 p-6">
         <h2 className="font-display text-lg font-semibold">Aparência</h2>
         <p className="text-sm text-muted-foreground">
-          Alterne entre o modo claro e o modo escuro da Lumina.
+          Alterne entre o modo claro e o modo escuro da Lumyes.
         </p>
         <Button type="button" variant="outline" className="gap-2" onClick={toggle}>
           {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
@@ -102,7 +102,7 @@ function Configuracoes() {
           <Instagram className="size-5" /> Instagram
         </h2>
         <p className="text-sm text-muted-foreground">
-          A conexão é feita pelo login oficial do Instagram/Meta. A Lumina nunca pede senha, token ou
+          A conexão é feita pelo login oficial do Instagram/Meta. A Lumyes nunca pede senha, token ou
           código técnico — basta autorizar a conta da igreja.
         </p>
         <Button

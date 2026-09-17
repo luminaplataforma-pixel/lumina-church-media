@@ -33,12 +33,12 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/versiculos")({
   head: () => ({
     meta: [
-      { title: "Banco de Versículos — Lumina" },
+      { title: "Banco de Versículos — Lumyes" },
       {
         name: "description",
         content: "Guarde e organize versículos por tema, categoria e favoritos para usar na mídia.",
       },
-      { property: "og:title", content: "Banco de Versículos — Lumina" },
+      { property: "og:title", content: "Banco de Versículos — Lumyes" },
       { property: "og:description", content: "Versículos organizados por tema e favoritos." },
     ],
   }),

@@ -80,11 +80,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lumina — Gestão de mídia para igrejas" },
+      { title: "Lumyes — Automação inteligente para equipes" },
       {
         name: "description",
         content:
-          "Lumina centraliza planejamento, produção, escala e resultados da mídia da sua igreja.",
+          "Lumyes conecta pessoas, processos e IA para transformar trabalho repetitivo em progresso real.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

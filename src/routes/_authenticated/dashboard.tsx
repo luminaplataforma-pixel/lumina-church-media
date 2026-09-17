@@ -45,12 +45,12 @@ import { useWorkspace } from "@/lib/workspace";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Lumina" },
+      { title: "Dashboard — Lumyes" },
       {
         name: "description",
         content: "Visão geral da mídia da igreja: indicadores, pendências, escala e Instagram.",
       },
-      { property: "og:title", content: "Dashboard — Lumina" },
+      { property: "og:title", content: "Dashboard — Lumyes" },
       { property: "og:description", content: "Indicadores e pendências da equipe de mídia." },
     ],
   }),

@@ -23,12 +23,12 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/planejamento")({
   head: () => ({
     meta: [
-      { title: "Planejamento — Lumina" },
+      { title: "Planejamento — Lumyes" },
       {
         name: "description",
         content: "Calendário, lista, timeline e kanban do planejamento de conteúdo da igreja.",
       },
-      { property: "og:title", content: "Planejamento — Lumina" },
+      { property: "og:title", content: "Planejamento — Lumyes" },
       { property: "og:description", content: "Calendário editorial e kanban com arrastar e soltar." },
     ],
   }),
