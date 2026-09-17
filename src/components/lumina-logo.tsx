@@ -15,12 +15,12 @@ export function LuminaMark({ className }: { className?: string }) {
       <path
         d="M8.3 11.5A10.1 10.1 0 0 1 16 6.8"
         fill="none"
-        stroke="#1597ff"
+        stroke="#E0FF33"
         strokeLinecap="round"
         strokeWidth="3.2"
       />
       <circle cx="16" cy="16" r="4.1" fill="currentColor" />
-      <circle cx="16" cy="16" r="1.7" fill="#1597ff" />
+      <circle cx="16" cy="16" r="1.7" fill="#E0FF33" />
     </svg>
   );
 }
