@@ -96,7 +96,7 @@ function AuthPage() {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       <div className="hidden flex-col justify-between bg-sidebar p-12 lg:flex">
-        <LuminaLogo />
+        <LuminaLogo inverse />
         <div>
           <h2 className="max-w-md text-4xl font-semibold leading-tight">
             Toda a comunicação da sua igreja, organizada em um só lugar.
@@ -109,7 +109,7 @@ function AuthPage() {
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Lumyes</p>
       </div>
 
-      <div className="flex items-center justify-center bg-lumina-glow px-5 py-12">
+      <div className="flex items-center justify-center bg-lumyes-glow px-5 py-12">
         <div className="w-full max-w-md">
           <div className="mb-8 lg:hidden">
             <LuminaLogo />

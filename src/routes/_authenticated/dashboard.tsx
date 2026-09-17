@@ -73,15 +73,15 @@ function Kpi({
   return (
     <Link
       to={to}
-      className="surface group p-5 transition-all hover:-translate-y-0.5 hover:shadow-lift"
+      className="surface group relative overflow-hidden p-5 transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-primary hover:shadow-lift"
     >
       <div className="flex items-start justify-between">
         <p className="text-sm text-muted-foreground">{label}</p>
-        <span className="grid size-8 place-items-center rounded-lg bg-primary/15">
-          <Icon className="size-4" />
+        <span className="grid size-9 place-items-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+          <Icon className="size-[18px]" />
         </span>
       </div>
-      <p className="mt-3 font-display text-3xl font-semibold">{value}</p>
+      <p className="mt-3 font-display text-3xl font-bold tracking-[-0.05em]">{value}</p>
       {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
     </Link>
   );
@@ -180,7 +180,10 @@ function Dashboard() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         <section className="surface p-5 lg:col-span-2">
-          <h2 className="font-display text-lg font-semibold">Conteúdos por status</h2>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-display text-lg font-bold tracking-[-0.03em]">Conteúdos por status</h2>
+            <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold text-primary-foreground">Visão geral</span>
+          </div>
           <div className="mt-4 h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={statusChart}>
@@ -202,7 +205,7 @@ function Dashboard() {
         </section>
 
         <section className="surface p-5">
-          <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
+          <h2 className="flex items-center gap-2 font-display text-lg font-bold tracking-[-0.03em]">
             <AlertTriangle className="size-4 text-destructive" /> Pendências
           </h2>
           {pending.length === 0 ? (
@@ -229,7 +232,7 @@ function Dashboard() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         <section className="surface p-5">
-          <h2 className="font-display text-lg font-semibold">Próximos conteúdos</h2>
+          <h2 className="font-display text-lg font-bold tracking-[-0.03em]">Próximos conteúdos</h2>
           {upcoming.length === 0 ? (
             <EmptyState
               title="Nada agendado"
@@ -254,7 +257,7 @@ function Dashboard() {
         </section>
 
         <section className="surface p-5">
-          <h2 className="font-display text-lg font-semibold">Próximos eventos</h2>
+          <h2 className="font-display text-lg font-bold tracking-[-0.03em]">Próximos eventos</h2>
           {nextEvents.length === 0 ? (
             <EmptyState title="Sem eventos" description="Cadastre os cultos e eventos da igreja." />
           ) : (
@@ -274,7 +277,7 @@ function Dashboard() {
         </section>
 
         <section className="surface p-5">
-          <h2 className="font-display text-lg font-semibold">Escala de hoje</h2>
+          <h2 className="font-display text-lg font-bold tracking-[-0.03em]">Escala de hoje</h2>
           {todaySchedule.length === 0 ? (
             <EmptyState title="Ninguém escalado hoje" description="Monte a escala do mês." />
           ) : (
@@ -294,7 +297,7 @@ function Dashboard() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         <section className="surface p-5 lg:col-span-2">
-          <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
+          <h2 className="flex items-center gap-2 font-display text-lg font-bold tracking-[-0.03em]">
             <Instagram className="size-4" /> Instagram Insights
           </h2>
           {insightChart.length === 0 ? (
@@ -342,7 +345,7 @@ function Dashboard() {
         </section>
 
         <section className="surface p-5">
-          <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
+          <h2 className="flex items-center gap-2 font-display text-lg font-bold tracking-[-0.03em]">
             <Activity className="size-4" /> Atividades recentes
           </h2>
           {(activities.data ?? []).length === 0 ? (

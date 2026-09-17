@@ -108,7 +108,7 @@ function Relatorios() {
     const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" }));
     const a = document.createElement("a");
     a.href = url;
-    a.download = "lumina-relatorio-conteudos.csv";
+    a.download = "lumyes-relatorio-conteudos.csv";
     a.click();
     URL.revokeObjectURL(url);
   }

@@ -51,10 +51,10 @@ function NavLinks({ collapsed, onNavigate }: { collapsed: boolean; onNavigate?: 
             onClick={onNavigate}
             title={label}
             className={cn(
-              "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
+              "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.98]",
               active
-                ? "bg-primary text-primary-foreground shadow-soft"
-                : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                ? "bg-primary text-primary-foreground shadow-[0_8px_20px_rgb(0_0_0/0.16)]"
+                : "text-sidebar-foreground/65 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
               collapsed && "justify-center px-0",
             )}
           >
@@ -86,21 +86,21 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen bg-background">
       <aside
         className={cn(
-          "sticky top-0 hidden h-screen shrink-0 flex-col border-r border-sidebar-border bg-sidebar transition-[width] duration-300 md:flex",
+          "sticky top-0 hidden h-screen shrink-0 flex-col border-r border-sidebar-border bg-sidebar transition-[width] duration-200 ease-out md:flex",
           collapsed ? "w-[76px]" : "w-[260px]",
         )}
       >
         <div className={cn("flex items-center gap-2 px-5 py-5", collapsed && "justify-center px-0")}>
-          {collapsed ? <LuminaMark /> : <LuminaLogo />}
+          {collapsed ? <LuminaMark /> : <LuminaLogo inverse />}
         </div>
-        <div className={cn("px-5 pb-4", collapsed && "hidden")}>
-          <p className="truncate text-xs text-muted-foreground">{workspaceName}</p>
+        <div className={cn("px-5 pb-5", collapsed && "hidden")}>
+          <p className="truncate text-xs text-sidebar-foreground/50">{workspaceName}</p>
         </div>
         <NavLinks collapsed={collapsed} />
         <div className="mt-auto space-y-1 p-3">
           <Button
             variant="ghost"
-            className={cn("w-full justify-start gap-3", collapsed && "justify-center px-0")}
+            className={cn("w-full justify-start gap-3 text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground", collapsed && "justify-center px-0")}
             onClick={() => setCollapsed((c) => !c)}
           >
             <Menu className="size-[18px]" />
@@ -109,7 +109,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Button
             variant="ghost"
             className={cn(
-              "w-full justify-start gap-3 text-destructive hover:text-destructive",
+              "w-full justify-start gap-3 text-sidebar-foreground/65 hover:bg-sidebar-accent hover:text-primary",
               collapsed && "justify-center px-0",
             )}
             onClick={() => void signOut()}
@@ -121,7 +121,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur-md sm:px-6">
+        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-border bg-background/85 px-4 py-3 backdrop-blur-md sm:px-6">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
@@ -129,15 +129,15 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <span className="sr-only">Abrir menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[260px] bg-sidebar p-0">
+            <SheetContent side="left" className="w-[260px] bg-sidebar p-0 text-sidebar-foreground">
               <SheetTitle className="px-5 py-5">
-                <LuminaLogo />
+                <LuminaLogo inverse />
               </SheetTitle>
               <NavLinks collapsed={false} onNavigate={() => setMobileOpen(false)} />
               <div className="p-3">
                 <Button
                   variant="ghost"
-                  className="w-full justify-start gap-3 text-destructive"
+                  className="w-full justify-start gap-3 text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-primary"
                   onClick={() => void signOut()}
                 >
                   <LogOut className="size-[18px]" /> Sair
@@ -164,7 +164,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="flex-1 bg-lumina-glow">
+        <main className="flex-1 bg-lumyes-glow">
           <div className="mx-auto w-full max-w-[1400px] animate-rise space-y-6 p-4 pb-24 sm:p-6 md:pb-10">
             {children}
           </div>
