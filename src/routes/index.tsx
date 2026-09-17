@@ -26,7 +26,7 @@ import { LuminaLogo } from "@/components/lumina-logo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Lumyes — O sistema operacional da mídia da sua igreja" },
+      { title: "Lumyes — Automação inteligente para equipes que avançam" },
       {
         name: "description",
         content:
@@ -52,9 +52,10 @@ const SOLUTIONS = [
     icon: Workflow,
   },
   {
-    icon: Sparkles,
-    title: "Lumyes AI",
-    text: "Legendas, ideias, CTAs e calendários editoriais gerados para a sua igreja.",
+    number: "02",
+    title: "Inteligência para decisões",
+    text: "Transforme sinais espalhados em insights claros para decidir melhor, mais rápido e com contexto.",
+    icon: BrainCircuit,
   },
   {
     number: "03",
@@ -431,27 +432,36 @@ function Landing() {
         )}
       </header>
 
-      <section className="bg-lumyes-glow">
-        <div className="mx-auto w-full max-w-6xl px-5 py-20 text-center sm:py-28">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium">
-            <Sparkles className="size-3.5 text-primary" /> Plataforma de mídia para igrejas
-          </span>
-          <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-semibold leading-[1.05] sm:text-6xl">
-            O sistema operacional da equipe de mídia da sua igreja
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Planejar → Criar → Produzir → Revisar → Escalar → Publicar → Analisar. Tudo em um único
-            ambiente, sem planilhas, sem grupos perdidos no WhatsApp.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg">
-              <Link to="/auth" search={{ mode: "signup" }}>
-                Criar conta da igreja
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link to="/auth">Já tenho conta</Link>
-            </Button>
+      <main>
+        <section className="hero-section">
+          <div className="hero-orb hero-orb-one" />
+          <div className="hero-orb hero-orb-two" />
+          <div className="hero-content page-width">
+            <Eyebrow icon={Sparkles}>Automação inteligente para equipes</Eyebrow>
+            <h1>
+              Seu trabalho, <span>mais inteligente.</span>
+            </h1>
+            <p className="hero-description">
+              Conecte pessoas, processos e IA em um só lugar para transformar tarefas repetitivas em
+              progresso real.
+            </p>
+            <div className="hero-actions">
+              <PrimaryCta>Explorar o Lumyes</PrimaryCta>
+              <a className="button-secondary group" href="#how-it-works">
+                <Play className="size-3.5 fill-current" /> Ver como funciona
+              </a>
+            </div>
+            <div className="hero-note">
+              <span className="note-avatars">
+                <i>R</i>
+                <i>C</i>
+                <i>M</i>
+              </span>
+              <span>Confiado por equipes que fazem mais com menos.</span>
+            </div>
+            <div className="hero-dashboard-wrap">
+              <DashboardMockup />
+            </div>
           </div>
         </section>
 
@@ -733,9 +743,19 @@ function Landing() {
       <footer className="landing-footer page-width">
         <div className="footer-main">
           <LuminaLogo />
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Lumyes. Feito para a comunicação do Reino.
-          </p>
+          <div className="footer-links">
+            <a href="#benefits">Benefícios</a>
+            <a href="#solutions">Soluções</a>
+            <a href="#pricing">Planos</a>
+            <Link to="/auth">Entrar</Link>
+          </div>
+          <a href="#" className="back-top">
+            Voltar ao topo <ArrowUpRight className="size-3.5" />
+          </a>
+        </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Lumyes. Feito para equipes que avançam.</span>
+          <span>Privacidade · Termos</span>
         </div>
       </footer>
     </div>
